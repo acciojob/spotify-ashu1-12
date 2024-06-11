@@ -343,12 +343,24 @@ public class SpotifyRepository {
     	
     	//update songLikeMap
     	List<User> userLikeSongs;
+    	boolean userPresent=false;
     	if(songLikeMap.containsKey(obtainedSong)) {
     		userLikeSongs = songLikeMap.get(obtainedSong);
-    		if(!userLikeSongs.contains(obtainedUser)) {
+    		for(User user:userLikeSongs) {
+    			if(user.getMobile().equals(mobile)) {
+    				userPresent=true;
+    				break;
+    			}
+    		}
+    		if(!userPresent) {
     			userLikeSongs.add(obtainedUser);
     			songLikeMap.put(obtainedSong, userLikeSongs);
     		}
+    		
+//    		if(!userLikeSongs.contains(obtainedUser)) {
+//    			userLikeSongs.add(obtainedUser);
+//    			songLikeMap.put(obtainedSong, userLikeSongs);
+//    		}
     	}else {
     		userLikeSongs = new ArrayList<>();
     		userLikeSongs.add(obtainedUser);
